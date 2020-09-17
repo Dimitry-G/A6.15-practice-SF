@@ -15,3 +15,7 @@
 .miss {
   background-color: red;
 }
+
+.hide-field {
+  display: none;
+}
