@@ -6,14 +6,11 @@ let missHits = 0;
 let firstHitTime = 0;
 
 function round() {
-  // FIXME: надо бы убрать "target" прежде чем искать новый - OK
   let divSelector = randomDivId();
   $(divSelector).addClass("target");
-  // TODO: помечать target текущим номером - OK
   if ($(divSelector).hasClass("target")) {
     $(divSelector).text(`${hits + 1}`);
   }
-  // FIXME: тут надо определять при первом клике firstHitTime - OK
   if (hits === 1) {
     firstHitTime = getTimestamp();
   } else if (hits === maxHits) {
@@ -28,7 +25,6 @@ function randomDivId() {
 }
 
 function endGame() {
-  // FIXME: спрятать игровое поле сначала - OK
   $("#hide-field").addClass('hide-field');
   let totalPlayedMillis = getTimestamp() - firstHitTime;
   let totalPlayedSeconds = Number(totalPlayedMillis / 1000).toPrecision(3);
@@ -43,7 +39,6 @@ function getTimestamp() {
 }
 
 function handleClick(event) {
-  // FIXME: убирать текст со старых таргетов. Кажется есть .text? - OK
   if ($(event.target).hasClass("target")) {
     hits = hits + 1;
     $(event.target).removeClass("target");
@@ -54,7 +49,6 @@ function handleClick(event) {
   } else {
     $(event.target).addClass("miss");
   }
-  // TODO: как-то отмечать если мы промахнулись? См CSS класс .miss - OK
   if ($(event.target).hasClass("miss")) {
     missHits = missHits + 1;
     $(event.target).text(`${missHits}`);
@@ -62,16 +56,15 @@ function handleClick(event) {
 }
 
 function init() {
-  // TODO: заказчик просил отдельную кнопку, запускающую игру а не просто по загрузке - OK
+  // TODO: заказчик просил отдельную кнопку, запускающую игру а не просто по загрузке 
   $("#button-reload").click(function () {
     location.reload();
     $("#hide-field").removeClass('hide-field');
-  });
-
+  }); 
   round();
-
   $(".game-field").click(handleClick);
-
+  
 }
 
 $(document).ready(init);
+
